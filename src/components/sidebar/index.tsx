@@ -28,7 +28,7 @@ export const Sidebar = (props: Props) => {
 
         <div>
           <Button
-            image={DashboardIcon}
+            icon={DashboardIcon}
             text="Dashboard"
             className="!text-dark-secondary"
           />
@@ -39,18 +39,18 @@ export const Sidebar = (props: Props) => {
             <p>ORGANIZATION</p>
             <FaChevronDown />
           </div>
-          <Button image={OrganizationIcon} text="Kelick" />
+          <Button icon={OrganizationIcon} text="Kelick" />
         </div>
 
         <div className="flex flex-col gap-3">
           <div className="px-4 py-2 text-base font-bold tracking-widest text-gray-300">
             MANAGE
           </div>
-          <Button image={EmployeesIcon} text="Employees" />
-          <Button image={PayrollIcon} text="Payroll" />
-          <Button image={LeavesIcon} text="Leaves" />
-          <Button image={ClaimsIcon} text="Claims" />
-          <Button image={OptionsIcon} text="More" />
+          <Button icon={EmployeesIcon} text="Employees" />
+          <Button icon={PayrollIcon} text="Payroll" />
+          <Button icon={LeavesIcon} text="Leaves" />
+          <Button icon={ClaimsIcon} text="Claims" />
+          <Button icon={OptionsIcon} text="More" />
         </div>
       </div>
 
@@ -63,7 +63,7 @@ export const Sidebar = (props: Props) => {
 
           <div className="flex flex-col gap-2.5">
             <Button
-              image={WalletIcon}
+              icon={WalletIcon}
               text="Free Plan"
               hover={false}
               className="!py-2.5"
@@ -83,7 +83,7 @@ export const Sidebar = (props: Props) => {
           </div>
 
           <Button
-            image={BellIcon}
+            icon={BellIcon}
             text="Notifications"
             hover={false}
             className="!py-2.5 !pr-0"

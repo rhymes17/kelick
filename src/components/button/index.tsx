@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import React from 'react'
 
 interface ButtonProps {
-    image: string,
+    icon?: string,
     text: string,
     className?: string,
     hover?: boolean,
@@ -10,7 +10,7 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({
-    image,
+    icon,
     text,
     className,
     hover=true,
@@ -20,15 +20,17 @@ export const Button: React.FC<ButtonProps> = ({
 
     const baseStyle = clsx(
         'flex items-center gap-2 px-4 py-2 font-quicksand text-base font-medium text-gray-700 relative',
-        (hover && 'hover:text-dark-primary hover:font-semibold hover:border-[1px] hover:border-gray-200 hover:bg-[#F2F5F5] hover:rounded-lg transition-all duration-200'),
+        (hover && 'hover:text-dark-primary hover:font-semibold hover:border-[1px] hover:border-gray-200 hover:bg-[#F2F5F5] hover:rounded-xl transition-all duration-200'),
         className
     )
 
     return (
         <button className={baseStyle}>
-            <img src={image} width={22}/>
+            <img src={icon} width={22}/>
             <p>{text}</p>
             {rightIcon}
         </button>
     )
 }
+
+
