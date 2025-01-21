@@ -1,9 +1,20 @@
-import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import Navbar from './components/navbar/index.tsx';
+import Home from './pages/home';
+import { Sidebar } from './components/sidebar/index.tsx';
 
 function App() {
   return (
-    <div>
-      <h1 className="text-3xl text-red-500">Hello </h1>
+    <div className="flex text-black">
+      <Sidebar />
+
+      <div className='w-10/12'>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Home/>} />
+        </Routes>
+      </div>
+      
     </div>
   );
 }
