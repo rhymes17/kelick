@@ -9,7 +9,7 @@ function App() {
     <div className="flex text-black">
       <Sidebar />
 
-      <div className="w-10/12">
+      <div className="w-10/12 h-screen overflow-y-scroll">
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

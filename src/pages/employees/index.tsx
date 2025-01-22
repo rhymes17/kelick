@@ -1,23 +1,22 @@
 import { StartBuildingTeam } from '../../components/employeePage/startBuildingTeam';
 import ViewEmployees from '../../components/employeePage/ViewEmployees';
-import React, { useState } from 'react'
-type Props = {}
+import React, { useState } from 'react';
+import { Loading } from '../../components/loading';
+type Props = {};
 
-const Employees = (props: Props) => {
-
-  const [employeesCount, setEmployeesCount] = useState(0);
+export const Employees: React.FC<Props> = () => {
+  const [employeesCount, setEmployeesCount] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
-    <div className='p-10 flex justify-center items-center'>
-      {
-        employeesCount == 0 ? (
-          <StartBuildingTeam />
-        ): (
-          <ViewEmployees />
-        )
-      }
+    <div className=" flex items-center justify-center p-6">
+      {employeesCount == 0 ? (
+        <StartBuildingTeam />
+      ) : isLoading ? (
+        <Loading/>
+      ) : (
+        <ViewEmployees />
+      )}
     </div>
-  )
-}
-
-export default Employees
+  );
+};

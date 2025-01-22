@@ -4,7 +4,7 @@ type Props = {};
 
 const Navbar = (props: Props) => {
   return (
-    <div className="h-24 w-full border-b-[1px] px-8 py-[26px]">
+    <div className="h-24 w-full border-b-[1px] px-8 py-[26px] sticky top-0 bg-white">
       <p className="font-quicksand text-3xl font-bold leading-10 text-gray-700 tracking-tight">
         Employees
       </p>

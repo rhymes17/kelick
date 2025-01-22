@@ -3,6 +3,7 @@ import React from 'react';
 
 interface ButtonProps {
   icon?: string;
+  iconWidth?: number;
   text: string;
   className?: string;
   hover?: boolean;
@@ -12,6 +13,7 @@ interface ButtonProps {
 
 export const Button: React.FC<ButtonProps> = ({
   icon,
+  iconWidth,
   text,
   className,
   hover = true,
@@ -27,7 +29,7 @@ export const Button: React.FC<ButtonProps> = ({
 
   return (
     <button className={baseStyle} onClick={onClick}>
-      {icon && <img src={icon} width={22} />}
+      {icon && <img src={icon} width={iconWidth ? iconWidth : 22} />}
       <div>{text}</div>
       {rightIcon}
     </button>
