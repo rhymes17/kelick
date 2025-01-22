@@ -14,6 +14,8 @@ import { FaChevronDown } from 'react-icons/fa6';
 
 import { Button } from '../button';
 import { ProgressBar } from '../progressBar';
+import { SideBarLinks } from '../../constants/SidebarLinks';
+import { Link } from 'react-router-dom';
 
 type Props = {};
 
@@ -26,31 +28,33 @@ export const Sidebar = (props: Props) => {
           <img src={KelickLogo} className="left-0" />
         </div>
 
-        <div>
+        <div className='flex'>
           <Button
             icon={DashboardIcon}
             text="Dashboard"
-            className="!text-dark-secondary"
+            className="w-full !text-dark-secondary"
           />
         </div>
 
-        <div>
+        <div className='flex flex-col'>
           <div className="flex items-center justify-between px-4 py-2 text-base font-bold tracking-widest text-gray-300">
             <p>ORGANIZATION</p>
             <FaChevronDown />
           </div>
-          <Button icon={OrganizationIcon} text="Kelick" />
+          <Button icon={OrganizationIcon} text="Kelick" className='w-full'/>
         </div>
 
         <div className="flex flex-col gap-3">
           <div className="px-4 py-2 text-base font-bold tracking-widest text-gray-300">
             MANAGE
           </div>
-          <Button icon={EmployeesIcon} text="Employees" />
-          <Button icon={PayrollIcon} text="Payroll" />
-          <Button icon={LeavesIcon} text="Leaves" />
-          <Button icon={ClaimsIcon} text="Claims" />
-          <Button icon={OptionsIcon} text="More" />
+          {
+            SideBarLinks.map((link) => (
+              <Link to={link.path}>
+                <Button icon={link.icon} text={link.text} className='w-full'/>
+              </Link>
+            ))
+          }
         </div>
       </div>
 
