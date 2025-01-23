@@ -13,6 +13,7 @@ export default {
         "blue-gray-100":"#F1F5F9",
         "dark-primary":"#1A1A1A",
         "dark-secondary":"#1A1A1AB2",
+        "fill-1":"#F2F5F5",
         "gray-50":"#F9FCFC",
         "gray-100":"#F2F5F5",
         "gray-200":"#B3BEBE",
