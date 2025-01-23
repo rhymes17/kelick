@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '../../button';
 import DownloadIcon from '../../../assets/icons/DownloadIcon.png';
 import { FaChevronDown } from 'react-icons/fa6';
-import { FiSearch } from "react-icons/fi";
-import { EmployeeTable } from '../employeeTable';
-
+import { EmployeeChartData } from './employeeChartData';
 
 type ViewEmployeesProps = {};
 
@@ -19,6 +17,7 @@ const ViewEmployees: React.FC<ViewEmployeesProps> = () => {
         text="Export"
         className="h-9 w-fit rounded-xl border-[1px] border-gray-200 bg-surface-2 !px-0 !text-sm !font-semibold leading-5 !text-dark-primary"
       />
+      <EmployeeChartData />
 
       <div className="flex w-full justify-between">
         <div className="text-xl font-bold leading-9 tracking-tight">
