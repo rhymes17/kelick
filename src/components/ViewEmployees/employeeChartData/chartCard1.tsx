@@ -99,8 +99,8 @@ export const ChartCard1: React.FC<ChartCard1Props> = ({ dataset }) => {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {dataset.map((item) => (
-          <div className="flex items-center gap-2">
+        {dataset.map((item,index) => (
+          <div className="flex items-center gap-2" key={index}>
             <div
               className={`h-4 w-1 rounded-lg`}
               style={{ backgroundColor: item.backgroundColor }}

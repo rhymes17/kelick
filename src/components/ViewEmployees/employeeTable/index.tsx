@@ -2,30 +2,35 @@ import React, { useEffect, useState } from 'react';
 import { IoChevronUpSharp } from 'react-icons/io5';
 import { IoChevronDownSharp } from 'react-icons/io5';
 import { employees } from '../../../constants/EmployeeList';
-import Avatar from '../../../assets/images/Avatar.png';
 import clsx from 'clsx';
 import { EmployeeFilter } from '../employeeFilter';
 import { Row } from './row';
 import { FilterEmployees } from '../../filterEmployees';
+import { Employee, sortEmployees } from '../../sortEmployees';
 
 type EmployeeTableProps = {};
 
 export const EmployeeTable: React.FC<EmployeeTableProps> = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [dataLength, setDataLength] = useState<number>(1);
 
-  const [employeeListInUI, setEmployeeListInUI] = useState<
-    {
-      id: string;
-      profile: string;
-      email: string;
-      role: string;
-      status: string;
-    }[]
-  >(employees);
+  const [employeeListInUI, setEmployeeListInUI] =
+    useState<Employee[]>(employees);
 
+  const handleSort = (
+    selectedSortProperty: 'id' | 'profile' | 'email' | 'role' | 'status',
+    selectedSortDirection: 'aesc' | 'desc',
+  ) => {
+    const filteredAndSortedEmployees: Employee[] = sortEmployees(
+      employeeListInUI,
+      selectedSortProperty,
+      selectedSortDirection,
+    );
+
+    setEmployeeListInUI([...filteredAndSortedEmployees]);
+  };
 
   useEffect(() => {
+    console.log('rendered');
     const searchTermLower = searchQuery.toLocaleLowerCase();
 
     if (searchTermLower === '') {
@@ -34,7 +39,7 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = () => {
       const filteredValues = FilterEmployees(employees, searchTermLower);
       setEmployeeListInUI(filteredValues);
     }
-  });
+  }, [searchQuery, employees]);
 
   return (
     <div className="flex w-full flex-col gap-3">
@@ -45,7 +50,7 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = () => {
 
       {/* Table */}
       <div className="rounded-xl border-[1px] border-gray-200">
-        {dataLength > 0 && (
+        {employeeListInUI.length > 0 && (
           <table className="w-full divide-y-[1px] divide-solid divide-gray-200">
             <thead>
               <tr className="flex items-center justify-between rounded-xl bg-surface-2 font-medium text-gray-400">
@@ -61,22 +66,40 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = () => {
                 <td className="flex w-full items-center justify-between px-3">
                   <p>Employee ID</p>
                   <div className="flex flex-col items-center text-base">
-                    <IoChevronUpSharp />
-                    <IoChevronDownSharp />
+                    <IoChevronUpSharp
+                      onClick={() => handleSort('id', 'desc')}
+                      className="cursor-pointer"
+                    />
+                    <IoChevronDownSharp
+                      onClick={() => handleSort('id', 'aesc')}
+                      className="cursor-pointer"
+                    />
                   </div>
                 </td>
                 <td className="flex w-full items-center justify-between px-3">
                   <p>Employee Profile</p>
                   <div className="flex flex-col items-center text-base">
-                    <IoChevronUpSharp />
-                    <IoChevronDownSharp />
+                    <IoChevronUpSharp
+                      onClick={() => handleSort('profile', 'desc')}
+                      className="cursor-pointer"
+                    />
+                    <IoChevronDownSharp
+                      onClick={() => handleSort('profile', 'aesc')}
+                      className="cursor-pointer"
+                    />
                   </div>
                 </td>
                 <td className="flex w-full items-center justify-between px-3">
                   <p>Email</p>
                   <div className="flex flex-col items-center text-base">
-                    <IoChevronUpSharp />
-                    <IoChevronDownSharp />
+                    <IoChevronUpSharp
+                      onClick={() => handleSort('email', 'desc')}
+                      className="cursor-pointer"
+                    />
+                    <IoChevronDownSharp
+                      onClick={() => handleSort('email', 'aesc')}
+                      className="cursor-pointer"
+                    />
                   </div>
                 </td>
                 <td className="flex w-full items-center justify-between px-3">
@@ -97,7 +120,7 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = () => {
             </thead>
             <tbody className="divide-y-[1px] divide-solid divide-gray-200">
               {employeeListInUI.map((employee, index) => (
-                <Row employee={employee} index={index} />
+                <Row key={index} employee={employee} />
               ))}
             </tbody>
           </table>

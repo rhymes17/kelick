@@ -44,8 +44,8 @@ export const Sidebar = (props: Props) => {
             MANAGE
           </div>
           {
-            SideBarLinks.map((link) => (
-              <Link to={link.path}>
+            SideBarLinks.map((link,index) => (
+              <Link to={link.path} key={index}>
                 <Button icon={link.icon} text={link.text} className='w-full'/>
               </Link>
             ))

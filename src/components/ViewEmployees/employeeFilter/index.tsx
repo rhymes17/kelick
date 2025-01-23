@@ -59,11 +59,12 @@ export const EmployeeFilter: React.FC<EmployeeFilterProps> = ({
             className="min-h-9 rounded-xl border-[1px] border-gray-200 bg-surface-2 !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
           />
           <div className="absolute left-0 top-[30%] flex flex-col opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100">
-            {statusTypes.map((status) => (
+            {statusTypes.map((status,index) => (
               <Button
                 text={status}
                 className="absolute min-h-9 w-full border-[1px] bg-[#F2F5F5] !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
                 onClick={() => handleStatusQuery(status)}
+                key={index}
               />
             ))}
           </div>
@@ -76,11 +77,12 @@ export const EmployeeFilter: React.FC<EmployeeFilterProps> = ({
             className="min-h-9 rounded-xl border-[1px] border-gray-200 bg-surface-2 !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
           />
           <div className="absolute left-0 top-[30%] flex flex-col opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100">
-            {roleTypes.map((role) => (
+            {roleTypes.map((role,index) => (
               <Button
                 text={role}
                 className="absolute min-h-9 w-full border-[1px] bg-[#F2F5F5] !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
                 onClick={() => handleRoleQuery(role)}
+                key={index}
               />
             ))}
           </div>

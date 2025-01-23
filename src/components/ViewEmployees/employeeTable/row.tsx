@@ -10,14 +10,12 @@ type RowProps = {
     role: string;
     status: string;
   };
-  index: number;
 };
 
-export const Row: React.FC<RowProps> = ({ employee, index }) => {
+export const Row: React.FC<RowProps> = ({ employee }) => {
   return (
     <tr
       className="flex items-center justify-between text-left text-sm font-semibold leading-5 text-gray-900"
-      key={index}
     >
       <td className="px-3 py-4">
         <input

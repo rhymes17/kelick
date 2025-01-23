@@ -40,8 +40,9 @@ export const ChartCard2: React.FC<ChartCard2Props> = ({ dataset }) => {
         </div>
 
         <div className="flex w-full gap-2">
-          {dataset.map((item) => (
+          {dataset.map((item,index) => (
             <div
+            key={index}
               className={clsx(`h-2 rounded-lg`)}
               style={{
                 width: `${(item.data / total) * 100}%`,
@@ -56,8 +57,8 @@ export const ChartCard2: React.FC<ChartCard2Props> = ({ dataset }) => {
       </div>
 
       <div className="flex gap-2">
-        {dataset.map((item) => (
-          <div className="flex items-center gap-2">
+        {dataset.map((item,index) => (
+          <div className="flex items-center gap-2" key={index}>
             <div
               className={`h-4 w-1 rounded-lg`}
               style={{ backgroundColor: item.backgroundColor }}
