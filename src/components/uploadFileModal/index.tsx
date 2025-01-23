@@ -7,16 +7,15 @@ import { Button } from '../button';
 import clsx from 'clsx';
 
 interface UploadFileProps {
-  viewFileUploadModal?: boolean;
   setViewFileUploadModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const UploadFileModal: React.FC<UploadFileProps> = ({
-  viewFileUploadModal,
   setViewFileUploadModal,
 }) => {
   const baseStyle = clsx(
-    'fixed inset-0 z-[1000] flex justify-center items-center bg-gray-700 bg-opacity-50 backdrop-sepia-0',
+    'fixed inset-0 z-[1000] bg-gray-700 bg-opacity-50',
+    'flex justify-center items-center',
   );
 
   return (
@@ -32,7 +31,7 @@ export const UploadFileModal: React.FC<UploadFileProps> = ({
             </button>
           </div>
           <div className="flex flex-col gap-1">
-            <div className="bg-surface-2 flex min-h-[200px] flex-col items-center justify-center rounded-xl border-[2px] border-dashed border-gray-200 hover:border-brand-active p-4">
+            <div className="flex min-h-[200px] flex-col items-center justify-center rounded-xl border-[2px] border-dashed border-gray-200 bg-surface-2 p-4 hover:border-brand-active">
               <img src={FileIcon} />
               <p className="text-center text-sm font-medium leading-5 text-gray-300">
                 Drag and drop your files here <br />
@@ -62,7 +61,7 @@ export const UploadFileModal: React.FC<UploadFileProps> = ({
             <Button
               icon={DownloadIcon}
               text="Download XLSX"
-              className="min-w-fit bg-surface-2 ml-10 rounded-xl border-[1px] border-gray-200 !px-2 !text-sm !font-semibold leading-5 !text-dark-primary"
+              className="ml-10 min-w-fit rounded-xl !border-gray-200 bg-surface-2 !px-2 !text-sm !font-semibold leading-5 !text-dark-primary"
             />
           </div>
         </div>
@@ -71,13 +70,13 @@ export const UploadFileModal: React.FC<UploadFileProps> = ({
           <Button
             text="Cancel"
             hover={false}
-            className="rounded-xl border-[1px] border-[#B3BEBE] font-semibold"
+            className="rounded-xl border-[1px] !border-[#B3BEBE] font-semibold"
             onClick={() => setViewFileUploadModal(false)}
           />
           <Button
             text="Continue"
             hover={false}
-            className="rounded-xl border-[1px] border-[#B3BEBE] bg-brand-active !px-2 font-normal !text-white"
+            className="rounded-xl border-[#B3BEBE] bg-brand-active !px-2 font-normal !text-white"
           />
         </div>
       </div>
