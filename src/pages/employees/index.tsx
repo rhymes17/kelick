@@ -1,5 +1,5 @@
-import { StartBuildingTeam } from '../../components/employeePage/startBuildingTeam';
-import ViewEmployees from '../../components/employeePage/ViewEmployees';
+import { StartBuildingTeam } from '../../components/ViewEmployees/startBuildingTeam';
+import ViewEmployees from '../../components/ViewEmployees';
 import React, { useState } from 'react';
 import { Loading } from '../../components/loading';
 import { SuccessModal } from '../../components/ViewEmployees/successModal';
