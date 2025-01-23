@@ -1,14 +1,15 @@
-import React from 'react'
-import { UploadProgressBar } from '../../components/uploadProgressBar'
+import React from 'react';
+import { UploadProgressBar } from '../../components/upload/uploadProgressBar';
+import FileUpload from '../../components/FileUpload';
 
-type Props = {}
+type Props = {};
 
 const Home = (props: Props) => {
   return (
     <div>
       Home
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

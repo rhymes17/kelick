@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import { EmployeeTable } from './employeeTable';
 import { EmployeeChartData } from './employeeChartData';
 import { SuccessModal } from './successModal';
+import { Employee } from '../sortEmployees';
 
-type ViewEmployeesProps = {};
+type ViewEmployeesProps = {
+  employees: Employee[];
+};
 
-const ViewEmployees: React.FC<ViewEmployeesProps> = () => {
+const ViewEmployees: React.FC<ViewEmployeesProps> = ({ employees }) => {
   const [openSuccessModal, setOpenSuccessModal] = useState<boolean>(false);
 
   return (
     <div className="flex w-full flex-col items-end gap-5 font-quicksand">
-      <EmployeeChartData />
+      <EmployeeChartData employees={employees} />
 
-      <EmployeeTable />
+      <EmployeeTable employees={employees} />
 
       {openSuccessModal && (
         <SuccessModal setOpenSuccessModal={setOpenSuccessModal} />

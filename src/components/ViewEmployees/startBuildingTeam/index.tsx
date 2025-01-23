@@ -3,10 +3,15 @@ import SearchUser1 from '../../../assets/images/SearchUser1.png';
 import BulkUploadIcon from '../../../assets/icons/BulkUploadIcon.png';
 import AddEmployeeIcon from '../../../assets/icons/AddEmployeeIcon.png';
 import { Button } from '../../button';
-import { UploadFileModal } from '../../uploadFileModal';
-type StartBuildingTeamProps = {};
+import { UploadFileModal } from '../../upload/uploadFileModal';
+import { Employee } from '../../sortEmployees';
+type StartBuildingTeamProps = {
+  setEmployees: React.Dispatch<React.SetStateAction<Employee[]>>;
+};
 
-export const StartBuildingTeam: React.FC<StartBuildingTeamProps> = () => {
+export const StartBuildingTeam: React.FC<StartBuildingTeamProps> = ({
+  setEmployees,
+}) => {
   const [viewFileUploadModal, setViewFileUploadModal] =
     useState<boolean>(false);
 
@@ -43,7 +48,10 @@ export const StartBuildingTeam: React.FC<StartBuildingTeamProps> = () => {
       </div>
 
       {viewFileUploadModal && (
-        <UploadFileModal setViewFileUploadModal={setViewFileUploadModal} />
+        <UploadFileModal
+          setViewFileUploadModal={setViewFileUploadModal}
+          setEmployees={setEmployees}
+        />
       )}
     </div>
   );

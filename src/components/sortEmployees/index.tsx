@@ -4,21 +4,21 @@ export type Employee = {
   email: string;
   role: string;
   status: string;
+  nationality: string;
+  employmentType: string;
 };
 
 export const sortEmployees = (
   employeeListInUI: Employee[],
   selectedSortProperty: string,
   selectedSortDirection: string,
-) => {
+): Employee[] => {
   switch (selectedSortProperty) {
     case 'id':
       return employeeListInUI.sort((a, b) =>
         selectedSortDirection === 'desc'
           ? b.id.toLocaleLowerCase().localeCompare(a.id.toLocaleLowerCase())
-          : a.id
-              .toLocaleLowerCase()
-              .localeCompare(b.id.toLocaleLowerCase()),
+          : a.id.toLocaleLowerCase().localeCompare(b.id.toLocaleLowerCase()),
       );
 
     case 'profile':
@@ -73,6 +73,8 @@ export const sortEmployees = (
           email: 'svsd',
           role: 'head',
           status: 'bv sdv',
+          nationality: 'singapore',
+          employmentType: 'Intern',
         },
       ];
   }

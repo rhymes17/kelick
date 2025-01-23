@@ -52,14 +52,14 @@ export const EmployeeFilter: React.FC<EmployeeFilterProps> = ({
             className="rounded-xl border-none bg-surface-2 px-2 outline-none placeholder:text-sm placeholder:font-medium placeholder:leading-5 placeholder:text-dark-secondary focus:ring-0"
           />
         </div>
-        <div className="group relative w-36 rounded-xl">
+        <div className="relative w-36 rounded-xl">
           <Button
             text={status}
             rightIcon={<FaChevronDown />}
-            className="min-h-9 rounded-xl border-[1px] border-gray-200 bg-surface-2 !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
+            className="peer min-h-9 rounded-xl border-[1px] border-gray-200 bg-surface-2 !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
           />
-          <div className="absolute left-0 top-[30%] flex flex-col opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100">
-            {statusTypes.map((status,index) => (
+          <div className="absolute left-0 top-[50%] flex flex-col opacity-0 transition-all duration-150 peer-focus:visible peer-focus:translate-y-[1.65em] peer-focus:opacity-100">
+            {statusTypes.map((status, index) => (
               <Button
                 text={status}
                 className="absolute min-h-9 w-full border-[1px] bg-[#F2F5F5] !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
@@ -74,10 +74,10 @@ export const EmployeeFilter: React.FC<EmployeeFilterProps> = ({
           <Button
             text={role}
             rightIcon={<FaChevronDown />}
-            className="min-h-9 rounded-xl border-[1px] border-gray-200 bg-surface-2 !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
+            className="peer min-h-9 rounded-xl border-[1px] border-gray-200 bg-surface-2 !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
           />
-          <div className="absolute left-0 top-[30%] flex flex-col opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100">
-            {roleTypes.map((role,index) => (
+          <div className="invisible absolute left-0 top-[30%] flex flex-col opacity-0 transition-all duration-150 group-focus:invisible peer-focus:visible peer-focus:translate-y-[1.65em] peer-focus:opacity-100">
+            {roleTypes.map((role, index) => (
               <Button
                 text={role}
                 className="absolute min-h-9 w-full border-[1px] bg-[#F2F5F5] !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"

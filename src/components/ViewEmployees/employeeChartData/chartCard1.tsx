@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import { ActiveElement, Chart, ChartEvent, registerables } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { Dataset } from '.';
 
 Chart.register(...registerables);
 
 type ChartCard1Props = {
-  dataset: {
-    id: number;
-    data: number;
-    label: string;
-    backgroundColor: string;
-  }[];
+  dataset: Dataset;
 };
 
 export const ChartCard1: React.FC<ChartCard1Props> = ({ dataset }) => {
@@ -99,7 +95,7 @@ export const ChartCard1: React.FC<ChartCard1Props> = ({ dataset }) => {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {dataset.map((item,index) => (
+        {dataset.map((item, index) => (
           <div className="flex items-center gap-2" key={index}>
             <div
               className={`h-4 w-1 rounded-lg`}

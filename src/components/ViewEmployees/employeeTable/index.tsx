@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { IoChevronUpSharp } from 'react-icons/io5';
 import { IoChevronDownSharp } from 'react-icons/io5';
-import { employees } from '../../../constants/EmployeeList';
 import clsx from 'clsx';
 import { EmployeeFilter } from '../employeeFilter';
 import { Row } from './row';
 import { FilterEmployees } from '../../filterEmployees';
 import { Employee, sortEmployees } from '../../sortEmployees';
 
-type EmployeeTableProps = {};
+type EmployeeTableProps = {
+  employees: Employee[];
+};
 
-export const EmployeeTable: React.FC<EmployeeTableProps> = () => {
+export const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees }) => {
+  // console.log("Employees in table",employees)
   const [searchQuery, setSearchQuery] = useState<string>('');
 
   const [employeeListInUI, setEmployeeListInUI] =
@@ -34,9 +36,9 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = () => {
     const searchTermLower = searchQuery.toLocaleLowerCase();
 
     if (searchTermLower === '') {
-      setEmployeeListInUI(employees);
+      setEmployeeListInUI(employeeListInUI);
     } else {
-      const filteredValues = FilterEmployees(employees, searchTermLower);
+      const filteredValues = FilterEmployees(employeeListInUI, searchTermLower);
       setEmployeeListInUI(filteredValues);
     }
   }, [searchQuery, employees]);
@@ -105,15 +107,27 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = () => {
                 <td className="flex w-full items-center justify-between px-3">
                   <p>Role</p>
                   <div className="flex flex-col items-center text-base">
-                    <IoChevronUpSharp />
-                    <IoChevronDownSharp />
+                    <IoChevronUpSharp
+                      onClick={() => handleSort('role', 'desc')}
+                      className="cursor-pointer"
+                    />
+                    <IoChevronDownSharp
+                      onClick={() => handleSort('role', 'aesc')}
+                      className="cursor-pointer"
+                    />
                   </div>
                 </td>
                 <td className="flex w-full items-center justify-between px-3">
                   <p>Status</p>
                   <div className="flex flex-col items-center text-base">
-                    <IoChevronUpSharp />
-                    <IoChevronDownSharp />
+                    <IoChevronUpSharp
+                      onClick={() => handleSort('status', 'desc')}
+                      className="cursor-pointer"
+                    />
+                    <IoChevronDownSharp
+                      onClick={() => handleSort('status', 'aesc')}
+                      className="cursor-pointer"
+                    />
                   </div>
                 </td>
               </tr>

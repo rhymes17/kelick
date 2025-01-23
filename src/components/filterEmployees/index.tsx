@@ -1,15 +1,9 @@
 import React from 'react'
+import { Employee } from '../sortEmployees'
 
-type Employees = {
-    id: string;
-        profile: string;
-        email: string;
-        role: string;
-        status: string;
-}
 
 export const FilterEmployees = (
-    employees: Employees[],
+    employees: Employee[],
     searchTermLower: string
 ) => employees.filter(
     (employee) => 

@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import { ActiveElement, Chart, ChartEvent, registerables } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { Dataset } from '.';
 
 Chart.register(...registerables);
 
-type ChartCard3Props = {
-  dataset: {
-    id: number;
-    data: number;
-    label: string;
-    backgroundColor: string;
-  }[];
-};
+interface ChartCard3Props {
+  dataset: Dataset;
+}
 
 export const ChartCard3: React.FC<ChartCard3Props> = ({ dataset }) => {
   const [clickedData, setClickedData] = useState<{
@@ -82,7 +78,7 @@ export const ChartCard3: React.FC<ChartCard3Props> = ({ dataset }) => {
       <div className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
           <p className="text-xs font-medium leading-4 text-gray-400">
-            Nationality
+            Employee Status
           </p>
           <div>
             <p className="text-4xl font-bold leading-[38px] text-gray-700">
@@ -97,7 +93,7 @@ export const ChartCard3: React.FC<ChartCard3Props> = ({ dataset }) => {
       </div>
 
       <div className="flex flex-wrap gap-2">
-        {dataset.map((item,index) => (
+        {dataset.map((item, index) => (
           <div className="flex items-center gap-2" key={index}>
             <div
               className={`h-4 w-1 rounded-lg`}
