@@ -1,14 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
-import Home from './pages/home';
 import { Sidebar } from './components/sidebar/index.tsx';
-import {Employees} from './pages/employees/index.tsx';
+import { Employees } from './pages/employees/index.tsx';
+import Home from './pages/home';
 
 function App() {
   return (
     <div className="flex text-black">
       <Sidebar />
 
-      <div className="w-10/12 h-screen overflow-y-scroll">
+      <div className="h-screen w-10/12 overflow-y-scroll">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/employees" element={<Employees />} />
