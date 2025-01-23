@@ -1,57 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Chart, registerables } from 'chart.js';
-import { Doughnut } from 'react-chartjs-2';
 import clsx from 'clsx';
 
 Chart.register(...registerables);
 
-type Props = {};
+type ChartCard2Props = {
+  dataset: {
+    id: number;
+    data: number;
+    label: string;
+    backgroundColor: string;
+  }[];
+};
 
-export const ChartCard2 = (props: Props) => {
-  const dataset = [
-    {
-      id: 1,
-      data: 24,
-      labels: 'Singaporean',
-      backgroundColor: '#36A2EB',
-      hoverBackgroundColor: '#FF6384',
-    },
-    {
-      id: 2,
-      data: 24,
-      labels: 'PR',
-      backgroundColor: '#FF6384',
-      hoverBackgroundColor: '#36A2EB',
-    },
-    {
-      id: 3,
-      data: 44,
-      labels: 'Foreigner',
-      backgroundColor: '#FFCE56',
-      hoverBackgroundColor: '#FFCE56',
-    },
-    {
-      id: 4,
-      data: 2,
-      labels: 'Others',
-      backgroundColor: '#4CAF50',
-      hoverBackgroundColor: '#4CAF50',
-    },
-  ];
+export const ChartCard2: React.FC<ChartCard2Props> = ({ dataset }) => {
+  const [clickedData, setClickedData] = useState<{
+    label: string;
+    data: number;
+  } | null>({ label: dataset[0].label, data: dataset[0].data });
 
+  const handleClick = () => {};
   let total = 0;
-  let Width = [];
-
-  useEffect(() => {
-    for (const item of dataset) {
-      total += item.data;
-      Width.push((item.data / total) * 100);
-    }
-  });
 
   for (const item of dataset) {
     total += item.data;
-    Width.push((item.data / total) * 100);
   }
 
   return (
@@ -61,30 +33,39 @@ export const ChartCard2 = (props: Props) => {
           <p className="text-xs font-medium leading-4 text-gray-400">
             Employment Type
           </p>
-          <p className="text-4xl font-bold leading-[38px] text-gray-700">13</p>
-          <p className="font-semibold text-gray-700">Full Timers</p>
+          <p className="text-4xl font-bold leading-[48px] text-gray-700">
+            {clickedData?.data}
+          </p>
+          <p className="font-semibold text-gray-700">{clickedData?.label}</p>
         </div>
 
         <div className="flex w-full gap-2">
           {dataset.map((item) => (
             <div
-              className={clsx(`h-2 bg-[${item.backgroundColor}] rounded-lg`)}
-              style={{ width: `${(item.data / total) * 100}%` }}
+              className={clsx(`h-2 rounded-lg`)}
+              style={{
+                width: `${(item.data / total) * 100}%`,
+                backgroundColor: item.backgroundColor,
+              }}
+              onClick={() => {
+                setClickedData({ label: item.label, data: item.data });
+              }}
             ></div>
           ))}
         </div>
       </div>
 
-      <div className="flex  gap-2">
+      <div className="flex gap-2">
         {dataset.map((item) => (
           <div className="flex items-center gap-2">
             <div
-              className={`h-4 w-1 rounded-lg bg-[${item.backgroundColor}]`}
+              className={`h-4 w-1 rounded-lg`}
+              style={{ backgroundColor: item.backgroundColor }}
             ></div>
             <p className="text-sm font-semibold leading-4 text-gray-700">
               {item.data}
             </p>
-            <p className="text-sm font-normal">{item.labels}</p>
+            <p className="text-sm font-normal">{item.label}</p>
           </div>
         ))}
       </div>
