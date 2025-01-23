@@ -21,9 +21,9 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
 }) => {
   const baseStyle = clsx(
-    'flex items-center gap-2 px-4 py-2 font-quicksand text-base font-medium text-gray-700 relative',
+    'flex items-center gap-2 px-4 py-2 font-quicksand text-base font-medium text-gray-700 relative border-[1px] border-transparent',
     hover &&
-      'hover:text-dark-primary hover:font-semibold hover:border-[1px] hover:border-gray-200 hover:bg-[#F2F5F5] hover:rounded-xl transition-all duration-200',
+      'hover:text-dark-primary hover:font-semibold hover:border-gray-200 hover:bg-[#F2F5F5] hover:rounded-xl transition-all duration-200',
     className,
   );
 
