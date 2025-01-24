@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { EmployeeTable } from './employeeTable';
 import { EmployeeChartData } from './employeeChartData';
 import { SuccessModal } from './successModal';
-import { Employee } from '../sortEmployees';
+import { Employee } from '../../pages/employees';
 
 type ViewEmployeesProps = {
   employees: Employee[];

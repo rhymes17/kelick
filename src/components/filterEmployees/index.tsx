@@ -1,8 +1,7 @@
 import React from 'react'
-import { Employee } from '../sortEmployees'
+import { Employee } from '../../pages/employees'
 
-
-export const FilterEmployees = (
+export const filterEmployees = (
     employees: Employee[],
     searchTermLower: string
 ) => employees.filter(

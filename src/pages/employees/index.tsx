@@ -5,8 +5,17 @@ import { Loading } from '../../components/loading';
 import Navbar from '../../components/navbar';
 import { SuccessModal } from '../../components/ViewEmployees/successModal';
 import { UploadProgressBar } from '../../components/upload/uploadProgressBar';
-import { Employee } from '../../components/sortEmployees';
 type Props = {};
+
+export type Employee = {
+  id: string;
+  profile: string;
+  email: string;
+  role: "All Role" | "Lead Growth" | "Lead Designer" | "Product Manager";
+  status:  "All Status" | "Active" | "Invite Sent" | "Payroll Only";
+  nationality: string;
+  employmentType: "Full-Timer" | "Part-Timer" | "Contract" | "Intern";
+};
 
 export const Employees: React.FC<Props> = () => {
   const [employeeCount, setEmployeeCount] = useState<number>(0);
@@ -14,12 +23,10 @@ export const Employees: React.FC<Props> = () => {
   const [openSuccessModal, setOpenSuccessModal] = useState<boolean>(false);
   const [employees, setEmployees] = useState<Employee[]>([]);
 
-  console.log(employees);
-
   return (
     <div className="flex flex-col items-center justify-center bg-surface-2">
       <Navbar
-        employeeCount={employeeCount}
+        employeeCount={employees.length}
         setOpenSuccessModal={setOpenSuccessModal}
       />
       <div className="h-[calc(100vh-96px)] w-full p-6">

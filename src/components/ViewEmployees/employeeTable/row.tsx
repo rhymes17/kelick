@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Avatar from '../../../assets/images/Avatar.png';
 
 type RowProps = {
@@ -10,13 +10,19 @@ type RowProps = {
     role: string;
     status: string;
   };
+  allChecked: boolean;
 };
 
-export const Row: React.FC<RowProps> = ({ employee }) => {
+export const Row: React.FC<RowProps> = ({ employee, allChecked }) => {
+
+  const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    setChecked(allChecked)
+  },[allChecked])
+
   return (
-    <tr
-      className="flex items-center justify-between text-left text-sm font-semibold leading-5 text-gray-900"
-    >
+    <tr className="flex items-center justify-between text-left text-sm font-semibold leading-5 text-gray-900">
       <td className="px-3 py-4">
         <input
           type="checkbox"
@@ -24,6 +30,8 @@ export const Row: React.FC<RowProps> = ({ employee }) => {
             'flex h-5 w-5 appearance-none items-center justify-center rounded-md border-[2px] border-gray-200',
             "checked:before:*: checked:border-gray-300 checked:text-gray-700 checked:after:content-['✔'] focus:outline-none",
           )}
+          checked={checked}
+          onClick={() => setChecked(!checked)}
         />
       </td>
       <td className="flex w-full items-center px-3 text-brand-active underline">

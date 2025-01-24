@@ -67,7 +67,6 @@ export const ChartCard3: React.FC<ChartCard3Props> = ({ dataset }) => {
         const value = chart.data.datasets[datasetIndex].data[index];
 
         // Log or handle the clicked segment's data
-        console.log(`Clicked Segment: Label=${label}, Value=${value}`);
         setClickedData({ label: label as string, data: value as number });
       }
     },

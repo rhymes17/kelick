@@ -4,16 +4,17 @@ import { IoChevronDownSharp } from 'react-icons/io5';
 import clsx from 'clsx';
 import { EmployeeFilter } from '../employeeFilter';
 import { Row } from './row';
-import { FilterEmployees } from '../../filterEmployees';
-import { Employee, sortEmployees } from '../../sortEmployees';
+import { filterEmployees } from '../../filterEmployees';
+import { Employee } from '../../../pages/employees';
+import { sortEmployees } from '../../sortEmployees';
 
 type EmployeeTableProps = {
   employees: Employee[];
 };
 
 export const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees }) => {
-  // console.log("Employees in table",employees)
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [allChecked, setAllChecked] = useState<boolean>(false);
 
   const [employeeListInUI, setEmployeeListInUI] =
     useState<Employee[]>(employees);
@@ -32,13 +33,12 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees }) => {
   };
 
   useEffect(() => {
-    console.log('rendered');
     const searchTermLower = searchQuery.toLocaleLowerCase();
 
     if (searchTermLower === '') {
-      setEmployeeListInUI(employeeListInUI);
+      setEmployeeListInUI(employees);
     } else {
-      const filteredValues = FilterEmployees(employeeListInUI, searchTermLower);
+      const filteredValues = filterEmployees(employeeListInUI, searchTermLower);
       setEmployeeListInUI(filteredValues);
     }
   }, [searchQuery, employees]);
@@ -48,6 +48,9 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees }) => {
       <EmployeeFilter
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        employees={employees}
+        employeeListInUI={employeeListInUI}
+        setEmployeeListInUI={setEmployeeListInUI}
       />
 
       {/* Table */}
@@ -63,6 +66,7 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees }) => {
                       'flex h-5 w-5 appearance-none items-center justify-center rounded-md border-[2px] border-gray-200',
                       "checked:before:*: checked:border-gray-300 checked:text-gray-700 checked:after:content-['✔'] focus:outline-none",
                     )}
+                    onClick={() => setAllChecked(!allChecked)}
                   />
                 </td>
                 <td className="flex w-full items-center justify-between px-3">
@@ -134,8 +138,8 @@ export const EmployeeTable: React.FC<EmployeeTableProps> = ({ employees }) => {
             </thead>
             <tbody className="divide-y-[1px] divide-solid divide-gray-200">
               {employeeListInUI.map((employee, index) => (
-                <Row key={index} employee={employee} />
-              ))}
+                <Row key={index} employee={employee} allChecked={allChecked} />
+              ))} 
             </tbody>
           </table>
         )}

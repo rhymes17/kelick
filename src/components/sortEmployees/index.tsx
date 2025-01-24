@@ -1,12 +1,4 @@
-export type Employee = {
-  id: string;
-  profile: string;
-  email: string;
-  role: string;
-  status: string;
-  nationality: string;
-  employmentType: string;
-};
+import { Employee } from "../../pages/employees";
 
 export const sortEmployees = (
   employeeListInUI: Employee[],
@@ -71,11 +63,12 @@ export const sortEmployees = (
           id: 'FDS23',
           profile: 'asa',
           email: 'svsd',
-          role: 'head',
-          status: 'bv sdv',
+          role: 'All Role',
+          status: 'All Status',
           nationality: 'singapore',
           employmentType: 'Intern',
         },
       ];
   }
 };
+

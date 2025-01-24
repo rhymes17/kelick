@@ -15,8 +15,6 @@ interface UploadFileProps {
   setEmployees: React.Dispatch<React.SetStateAction<Employee[]>>;
 }
 
-type RowData = { [key: string]: string | number | null };
-
 export const UploadFileModal: React.FC<UploadFileProps> = ({
   setViewFileUploadModal,
   setEmployees,
@@ -25,11 +23,9 @@ export const UploadFileModal: React.FC<UploadFileProps> = ({
   const [headers, setHeaders] = useState<string[]>([]);
 
   const handleFileChange = (file: File): void => {
-    // const file = e.target.files?.[0];
     if (!file) return;
 
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
-    console.log('File extension', fileExtension);
 
     if (fileExtension === 'csv') {
       readCSV(file);
@@ -55,9 +51,7 @@ export const UploadFileModal: React.FC<UploadFileProps> = ({
         alert('Error parsing CSV file.');
       },
     });
-    // console.log('Data', data);
   };
-  console.log('Data', fileData);
   const readXLSX = (file: File): void => {
     const reader = new FileReader();
     reader.onload = (event: any) => {
@@ -83,7 +77,6 @@ export const UploadFileModal: React.FC<UploadFileProps> = ({
           return rowObject;
         }),
       );
-      console.log('Headers', headers);
     };
 
     reader.onerror = (error: any) => {
@@ -95,7 +88,6 @@ export const UploadFileModal: React.FC<UploadFileProps> = ({
   };
 
   const onDrop = (acceptedFiles: File[]) => {
-    console.log(acceptedFiles);
     const file: File = acceptedFiles[0];
     if (file) {
       handleFileChange(file);

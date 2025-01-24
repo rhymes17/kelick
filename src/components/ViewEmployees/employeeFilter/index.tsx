@@ -1,38 +1,110 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { Button } from '../../button';
 import { FaChevronDown } from 'react-icons/fa6';
 import { roleTypes, statusTypes } from '../../../constants/EmployeeList';
+import { Employee } from '../../../pages/employees';
+import { filterEmployees } from '../../filterEmployees';
 
 type EmployeeFilterProps = {
   searchQuery: string;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  employees: Employee[];
+  employeeListInUI: Employee[];
+  setEmployeeListInUI: React.Dispatch<React.SetStateAction<Employee[]>>;
 };
 
 export const EmployeeFilter: React.FC<EmployeeFilterProps> = ({
   searchQuery,
   setSearchQuery,
+  employees,
+  employeeListInUI,
+  setEmployeeListInUI,
 }) => {
-  const [status, setStatus] = useState(statusTypes[0]);
-  const [role, setRole] = useState(roleTypes[0]);
+  const [statusButton, setStatusButton] = useState(statusTypes[0]);
+  const [roleButton, setRoleButton] = useState(roleTypes[0]);
+  const [originalList, setOriginalList] =
+    useState<Employee[]>(employeeListInUI);
 
-  const handleStatusQuery = (status: string) => {
+  // const [filterQuery, setFilterQuery] = useState<string>('')
+
+  const [tempRoleList, setTempRoleList] = useState<Employee[]>([
+    {
+      id: '1',
+      profile: 'string',
+      email: 'string',
+      role: 'Lead Designer',
+      status: 'Payroll Only',
+      nationality: 'Singaporean',
+      employmentType: 'Intern',
+    },
+  ]);
+
+  const [tempStatusList, setTempStatusList] = useState<Employee[]>([
+    {
+      id: '1',
+      profile: 'string',
+      email: 'string',
+      role: 'Lead Designer',
+      status: 'Payroll Only',
+      nationality: 'Singaporean',
+      employmentType: 'Intern',
+    },
+  ]);
+
+  const filterList = (employees: Employee[], filterQueryLower: string) =>
+    employees.filter(
+      (employee) =>
+        employee.role.toLocaleLowerCase().includes(filterQueryLower) ||
+        employee.status.toLocaleLowerCase().includes(filterQueryLower),
+    );
+
+  const handleStatusFilter = (status: string) => {
     if (status === 'All Status') {
-      setSearchQuery('');
+      setEmployeeListInUI(originalList);
     } else {
-      setSearchQuery(status);
+      setEmployeeListInUI(tempRoleList);
+      console.log('Temp role List', tempRoleList);
+      const filteredValues = filterList(
+        tempRoleList.length < 2 ? employeeListInUI : tempRoleList,
+        status.toLocaleLowerCase(),
+      );
+      setTempStatusList(filteredValues);
+      setEmployeeListInUI(filteredValues);
+      // setFilterQuery(status);
     }
-    setStatus(status);
+    setStatusButton(status);
   };
 
-  const handleRoleQuery = (role: string) => {
+  const handleRoleFilter = (role: string) => {
     if (role === 'All Role') {
-      setSearchQuery('');
+      setEmployeeListInUI(originalList);
     } else {
-      setSearchQuery(role);
+      setEmployeeListInUI(tempStatusList);
+      console.log('Temp status List', tempStatusList);
+      const filteredValues = filterList(
+        tempStatusList.length < 2 ? employeeListInUI : tempStatusList,
+        role.toLocaleLowerCase(),
+      );
+      setTempRoleList(filteredValues);
+      setEmployeeListInUI(filteredValues);
+      // setFilterQuery(role);
     }
-    setRole(role);
+    setRoleButton(role);
   };
+
+  // useEffect(() => {
+  //   const filterQueryLower = searchQuery.toLocaleLowerCase();
+
+  //   if (filterQuery === '') {
+  //     setEmployeeListInUI(employees);
+  //   } else {
+  //     console.log("employeeListInUI",employeeListInUI)
+  //     const filteredValues = filterList(employeeListInUI, filterQueryLower);
+  //     console.log("Filtered Values", filteredValues);
+  //     setEmployeeListInUI(filteredValues);
+  //   }
+  // }, [filterQuery, employees]);
 
   return (
     <div className="flex w-full justify-between">
@@ -54,7 +126,7 @@ export const EmployeeFilter: React.FC<EmployeeFilterProps> = ({
         </div>
         <div className="relative w-36 rounded-xl">
           <Button
-            text={status}
+            text={statusButton}
             rightIcon={<FaChevronDown />}
             className="peer min-h-9 rounded-xl border-[1px] border-gray-200 bg-surface-2 !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
           />
@@ -63,7 +135,7 @@ export const EmployeeFilter: React.FC<EmployeeFilterProps> = ({
               <Button
                 text={status}
                 className="absolute min-h-9 w-full border-[1px] bg-[#F2F5F5] !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
-                onClick={() => handleStatusQuery(status)}
+                onClick={() => handleStatusFilter(status)}
                 key={index}
               />
             ))}
@@ -72,7 +144,7 @@ export const EmployeeFilter: React.FC<EmployeeFilterProps> = ({
 
         <div className="group relative w-44 rounded-xl">
           <Button
-            text={role}
+            text={roleButton}
             rightIcon={<FaChevronDown />}
             className="peer min-h-9 rounded-xl border-[1px] border-gray-200 bg-surface-2 !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
           />
@@ -81,12 +153,23 @@ export const EmployeeFilter: React.FC<EmployeeFilterProps> = ({
               <Button
                 text={role}
                 className="absolute min-h-9 w-full border-[1px] bg-[#F2F5F5] !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
-                onClick={() => handleRoleQuery(role)}
+                onClick={() => handleRoleFilter(role)}
                 key={index}
               />
             ))}
           </div>
         </div>
+
+        <Button
+          text="Clear All"
+          className="min-h-9 rounded-xl border-[1px] border-gray-200 bg-surface-2 !px-3 !text-sm !font-semibold leading-5 !text-dark-primary duration-200 ease-in"
+          onClick={() => {
+            setEmployeeListInUI(employees);
+            setSearchQuery('');
+            setStatusButton('All Status');
+            setRoleButton('All Role');
+          }}
+        />
       </div>
     </div>
   );
